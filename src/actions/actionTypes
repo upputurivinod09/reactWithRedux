@@ -1,5 +1,5 @@
-// const CREATE_COURSE = 'CREATE_COURSE';
-// const CREATE_AUTHOR = 'CREATE_AUTHOR';
+// export const CREATE_COURSE = 'CREATE_COURSE';
+// export const CREATE_AUTHOR = 'CREATE_AUTHOR';
 
 module.exports = {
   CREATE_COURSE: 'CREATE_COURSE',

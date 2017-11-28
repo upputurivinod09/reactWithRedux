@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
+import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 class CoursesPage extends React.Component {
@@ -10,7 +10,6 @@ class CoursesPage extends React.Component {
     this.state = {
       course: { title: "" }
     };
-    console.log("initializing state");
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
@@ -61,5 +60,9 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(courseActions, dispatch)
   };
 }
+
+// const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+// export default connectedStateAndProps(CoursesPage);
+// is equal to below command
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);

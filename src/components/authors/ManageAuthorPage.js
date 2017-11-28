@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import AuthorForm from "./AuthorForm";
 import {connect} from 'react-redux';
 import * as authorActions from '../../actions/authorActions';
 import {bindActionCreators} from 'redux';
 import toastr from 'toastr';
+import AuthorList from "./AuthorList";
 
 class ManageAuthorPage extends React.Component {
   constructor(props, context) {
@@ -34,7 +35,8 @@ class ManageAuthorPage extends React.Component {
     // alert('Saving ' +this.state.author.firstName+","+this.state.author.lastName);
     this.props.actions.createAuthor(this.state.author);
     alert('Saving ' +this.state.author.firstName+","+this.state.author.lastName);
-    toastr.success('Author Saved.');
+    debugger;
+    // toastr.success('Author Saved.');
     // this.transitionTo('authors');
   }
 
@@ -48,6 +50,10 @@ class ManageAuthorPage extends React.Component {
     );
   }
 }
+
+ManageAuthorPage.propTypes = {
+  actions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   return {

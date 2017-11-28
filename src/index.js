@@ -9,7 +9,7 @@ import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();
-//provider attaches store with react container components
+//provider attaches store to react container components
 render (
     <Provider store={store}>
         <Router history={browserHistory} routes={routes} />

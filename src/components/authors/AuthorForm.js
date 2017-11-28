@@ -5,7 +5,7 @@ class AuthorForm extends React.Component {
   render() {
     return (
       <form>
-        <h1>Manage Author </h1>
+        {/*<h1>Manage Author </h1>*/}
         <TextInput
           name="firstName"
           label="First Name"
