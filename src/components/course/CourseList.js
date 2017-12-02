@@ -8,20 +8,20 @@ import {
   TableRowColumn
 } from 'material-ui/Table';
 
-const AuthorList = ({authors}) => {
+const CourseList = ({courses}) => {
   return (
     <Table>
       <TableHeader displaySelectAll = {false} enableSelectAll={false} adjustForCheckbox={false}>
       <TableRow>
-        <TableHeaderColumn>FirstName</TableHeaderColumn>
-        <TableHeaderColumn>LastName</TableHeaderColumn>
+        <TableHeaderColumn>Course Name</TableHeaderColumn>
+        <TableHeaderColumn>AuthorName</TableHeaderColumn>
       </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
-        {authors.map(author =>
-          <TableRow key={author.firstName}>
-            <TableRowColumn>{author.firstName}</TableRowColumn>
-            <TableRowColumn>{author.lastName}</TableRowColumn>
+        {courses.map(course =>
+          <TableRow key={course.name}>
+            <TableRowColumn>{course.name}</TableRowColumn>
+            <TableRowColumn>{course.authorName}</TableRowColumn>
           </TableRow>
         )}
       </TableBody>
@@ -29,9 +29,8 @@ const AuthorList = ({authors}) => {
   );
 };
 
-AuthorList.propTypes = {
-  authors: PropTypes.array.isRequired
+CourseList.propTypes = {
+  courses: PropTypes.array.isRequired
 };
 
-export default AuthorList;
-
+export default CourseList;

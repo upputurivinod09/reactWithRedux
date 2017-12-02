@@ -1,50 +1,30 @@
-import React, {PropTypes} from 'react';
+import React,{PropTypes} from 'react';
+import { Link, IndexLink } from 'react-router';
+import CourseList from './CourseList';
 import * as courseActions from '../../actions/courseActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {browserHistory} from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
-class CoursesPage extends React.Component {
-  constructor (props, context) {
-    super(props, context);
+class CoursePage extends React.Component {
 
-    this.state = {
-      course: { title: "" }
-    };
-
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
+  redirectToAddCoursePage() {
+    browserHistory.push("/addCourse");
   }
 
-  onTitleChange(event) {
-    const course = this.state.course;
-    course.title = event.target.value;
-    this.setState({course: course});
-  }
-
-  onClickSave() {
-    // alert('Saving '+this.state.course.title);
-    this.props.actions.createCourse(this.state.course);
-  }
-
-  courseRow(course, index) {
-    return <div key={index}>{course.title}</div>;
-  }
-
-  render() {
+  render () {
     return (
-        <div>
-          <h1>Courses</h1>
-          {this.props.courses.map(this.courseRow)}
-          <h2>Add Course</h2>
-          <input type="text" onChange={this.onTitleChange}
-                 value={this.state.course.title} />
-          <input type="submit" value="Save" onClick={this.onClickSave} />
-        </div>
+      <div>
+        <h1>Courses</h1>
+        <RaisedButton label="Add Course" onClick={this.redirectToAddCoursePage}/>
+        <CourseList courses={this.props.courses}/>
+      </div>
     );
   }
 }
 
-CoursesPage.propTypes = {
+CoursePage.propTypes = {
   actions: PropTypes.object.isRequired,
   courses: PropTypes.array.isRequired
 };
@@ -61,8 +41,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
-// export default connectedStateAndProps(CoursesPage);
-// is equal to below command
-
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);

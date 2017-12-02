@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as authorActions from '../../actions/authorActions';
 import {bindActionCreators} from 'redux';
 import toastr from 'toastr';
-import AuthorList from "./AuthorList";
+import {browserHistory} from 'react-router';
 
 class ManageAuthorPage extends React.Component {
   constructor(props, context) {
@@ -24,20 +24,15 @@ class ManageAuthorPage extends React.Component {
   setAuthor(event) {
     const author = this.state.author;
     let field = event.target.name;
-    console.log('field: '+field);
     let value = event.target.value;
-    console.log('value: '+value);
     author[field] = value;
     this.setState({author: author});
   }
 
   saveAuthor() {
-    // alert('Saving ' +this.state.author.firstName+","+this.state.author.lastName);
     this.props.actions.createAuthor(this.state.author);
-    alert('Saving ' +this.state.author.firstName+","+this.state.author.lastName);
-    debugger;
-    // toastr.success('Author Saved.');
-    // this.transitionTo('authors');
+    toastr.success('Author Saved.');
+    browserHistory.push('/authors');
   }
 
   render() {
