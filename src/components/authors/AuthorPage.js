@@ -1,10 +1,9 @@
 import React,{PropTypes} from 'react';
-import { Link, IndexLink } from 'react-router';
+import { Link, IndexLink , browserHistory } from 'react-router';
 import AuthorList from './AuthorList';
 import * as authorActions from '../../actions/authorActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class AuthorPage extends React.Component {

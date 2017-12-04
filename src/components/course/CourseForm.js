@@ -1,33 +1,63 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
 
-class CourseForm extends React.Component {
-  render() {
+const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors }) => {
     return (
       <form>
+        <h1>Manage Course</h1>
         <TextInput
-          name="name"
-          label="Course Name"
-          value={this.props.course.name}
-          onChange={this.props.onChange} />
+          name="title"
+          label="Title"
+          onChange={onChange}
+          value={course.title}
+          error={errors.title}
+        />
+
+        <SelectInput
+          name="authorId"
+          label="Author"
+          onChange={onChange}
+          value={course.authorId}
+          defaultOption="Select Author"
+          options={allAuthors}
+          error={errors.authorId}
+        />
 
         <TextInput
-          name="authorName"
-          label="Author Name"
-          value={this.props.course.authorName}
-          onChange={this.props.onChange} />
+          name="category"
+          label="Category"
+          value={course.category}
+          onChange={onChange}
+          error={errors.category}
+        />
 
-        <input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave}/>
+        <TextInput
+          name="length"
+          label="Length"
+          value={course.length}
+          onChange={onChange}
+          error={errors.length}
+        />
+
+        <input
+          type="submit"
+          disabled={loading}
+          value={loading ? 'Saving...' : 'Save'}
+          className="btn btn-primary"
+          onClick={onSave}
+          />
       </form>
     );
-  }
-}
+};
 
 CourseForm.propTypes = {
-  course: PropTypes.object.isRequired,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object
+  course: React.PropTypes.object.isRequired,
+  allAuthors: React.PropTypes.array,
+  onSave: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  loading: React.PropTypes.bool,
+  errors: React.PropTypes.object
 };
 
 export default CourseForm;

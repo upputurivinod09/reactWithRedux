@@ -1,16 +1,20 @@
 import React,{PropTypes} from 'react';
-import { Link, IndexLink } from 'react-router';
+import { Link, IndexLink , browserHistory } from 'react-router';
 import CourseList from './CourseList';
 import * as courseActions from '../../actions/courseActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class CoursePage extends React.Component {
 
+  constructor(props, context) {
+    super(props, context);
+    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+  }
+
   redirectToAddCoursePage() {
-    browserHistory.push("/addCourse");
+    browserHistory.push("/course");
   }
 
   render () {

@@ -24,8 +24,7 @@ class ManageAuthorPage extends React.Component {
   setAuthor(event) {
     const author = this.state.author;
     let field = event.target.name;
-    let value = event.target.value;
-    author[field] = value;
+    author[field] = event.target.value;
     this.setState({author: author});
   }
 

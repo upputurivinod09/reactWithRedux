@@ -1,65 +1,73 @@
 import React, {PropTypes} from 'react';
-import CourseForm from "./CourseForm";
 import {connect} from 'react-redux';
-import * as courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
-import toastr from 'toastr';
-import {browserHistory} from 'react-router';
+import * as courseActions from '../../actions/courseActions';
+import CourseForm from './CourseForm';
 
 class ManageCoursePage extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-    this.state = {
-      course: {
-        name: "",
-        authorName: ""
-      }
-    };
+        this.state = {
+          course: Object.assign({}, this.props.course),
+          errors: {}
+        };
 
-    this.setCourse = this.setCourse.bind(this);
-    this.saveCourse = this.saveCourse.bind(this);
-  }
+        this.updateCourseState = this.updateCourseState.bind(this);
+        this.onSave = this.onSave.bind(this);
+    }
 
-  setCourse(event) {
-    const course = this.state.course;
-    let field = event.target.name;
-    let value = event.target.value;
-    course[field] = value;
-    this.setState({course: course});
-  }
+    updateCourseState(event) {
+      const field = event.target.name;
+      let course = Object.assign({}, this.state.course);
+      course[field] = event.target.value;
+      return this.setState({course: course});
+    }
 
-  saveCourse() {
-    this.props.actions.createCourse(this.state.course);
-    toastr.success('Course Saved.');
-    browserHistory.push('/courses');
-  }
+    onSave(event) {
+      event.preventDefault();
+      this.props.actions.saveCourse(this.state.course);
+    }
 
-  render() {
-    return (
-      <div>
-        <h1>Courses</h1>
-        <h2>Add Course</h2>
-        <CourseForm course={this.state.course} onSave={this.saveCourse} onChange={this.setCourse}/>
-      </div>
-    );
-  }
+    render() {
+        return (
+          <CourseForm
+            allAuthors={this.props.authors}
+            onChange={this.updateCourseState}
+            onSave={this.onSave}
+            course={this.state.course}
+            errors={this.state.errors}
+          />
+        );
+    }
 }
 
 ManageCoursePage.propTypes = {
+  course: PropTypes.object.isRequired,
+  authors: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
+  let initialCourse = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+
+  const authorsFormattedForDropdown = state.authors.map(author => {
+    return {
+      value: author.id,
+      text: author.firstName + ' ' + author.lastName
+    };
+  });
+
   return {
-    courses: state.courses
+    course: initialCourse,
+    authors: authorsFormattedForDropdown
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(courseActions, dispatch)
-  };
+    return {
+        actions: bindActionCreators(courseActions, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);

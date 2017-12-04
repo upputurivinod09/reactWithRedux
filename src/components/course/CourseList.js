@@ -4,25 +4,25 @@ import {
   TableBody,
   TableHeader,
   TableHeaderColumn,
-  TableRow,
-  TableRowColumn
+  TableRow
 } from 'material-ui/Table';
+import CourseListRow from "./CourseListRow";
 
 const CourseList = ({courses}) => {
   return (
     <Table>
       <TableHeader displaySelectAll = {false} enableSelectAll={false} adjustForCheckbox={false}>
       <TableRow>
-        <TableHeaderColumn>Course Name</TableHeaderColumn>
-        <TableHeaderColumn>AuthorName</TableHeaderColumn>
+        <TableHeaderColumn>watch Reference</TableHeaderColumn>
+        <TableHeaderColumn>Title</TableHeaderColumn>
+        <TableHeaderColumn>Author</TableHeaderColumn>
+        <TableHeaderColumn>Category</TableHeaderColumn>
+        <TableHeaderColumn>Length</TableHeaderColumn>
       </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
         {courses.map(course =>
-          <TableRow key={course.name}>
-            <TableRowColumn>{course.name}</TableRowColumn>
-            <TableRowColumn>{course.authorName}</TableRowColumn>
-          </TableRow>
+          <CourseListRow course={course} key={course.id}/>
         )}
       </TableBody>
     </Table>
