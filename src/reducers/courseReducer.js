@@ -12,8 +12,10 @@ export default function courseReducer(state = initialState.courses, action) {
         Object.assign({}, action.course)
       ];
 
-    case types.CREATE_COURSE_SUCCESS:
-      return [...state, Object.assign({}, action.course)];
+    case types.CREATE_COURSE_SUCCESS: {
+      let newState = [...state, Object.assign({}, action.savedCourse)];
+      return newState;
+    }
 
     default:
       return state;
