@@ -1,31 +1,24 @@
 import React, {PropTypes} from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table';
+
 
 const AuthorList = ({authors}) => {
   return (
-    <Table>
-      <TableHeader displaySelectAll = {false} enableSelectAll={false} adjustForCheckbox={false}>
-      <TableRow>
-        <TableHeaderColumn>FirstName</TableHeaderColumn>
-        <TableHeaderColumn>LastName</TableHeaderColumn>
-      </TableRow>
-      </TableHeader>
-      <TableBody displayRowCheckbox={false}>
+    <table className="table">
+      <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+      </tr>
+      </thead>
+      <tbody>
         {authors.map(author =>
-          <TableRow key={author.firstName}>
-            <TableRowColumn>{author.firstName}</TableRowColumn>
-            <TableRowColumn>{author.lastName}</TableRowColumn>
-          </TableRow>
+          <tr key={author.firstName}>
+            <td>{author.firstName}</td>
+            <td>{author.lastName}</td>
+          </tr>
         )}
-      </TableBody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

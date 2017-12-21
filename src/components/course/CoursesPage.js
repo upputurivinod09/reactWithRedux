@@ -4,7 +4,6 @@ import CourseList from './CourseList';
 import * as courseActions from '../../actions/courseActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import RaisedButton from 'material-ui/RaisedButton';
 
 class CoursePage extends React.Component {
 
@@ -21,7 +20,7 @@ class CoursePage extends React.Component {
     return (
       <div>
         <h1>Courses</h1>
-        <RaisedButton label="Add Course" onClick={this.redirectToAddCoursePage}/>
+        <input type="submit" value="Add Course" className="btn btn-primary" onClick={this.redirectToAddCoursePage}/>
         <CourseList courses={this.props.courses}/>
       </div>
     );

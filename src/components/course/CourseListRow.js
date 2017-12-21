@@ -1,19 +1,15 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table';
 
 const CourseListRow = ({course}) => {
     return (
-      <TableRow>
-        <TableRowColumn><a href={course.watchHref} target="_blank">Watch</a></TableRowColumn>
-        <TableRowColumn><Link to={'/course/' + course.id}>{course.title}</Link></TableRowColumn>
-        <TableRowColumn>{course.authorId}</TableRowColumn>
-        <TableRowColumn>{course.category}</TableRowColumn>
-        <TableRowColumn>{course.length}</TableRowColumn>
-      </TableRow>
+      <tr>
+        <td><a href={course.watchHref} target="_blank">Watch</a></td>
+        <td><Link to={'/course/' + course.id}>{course.title}</Link></td>
+        <td>{course.authorId}</td>
+        <td>{course.category}</td>
+        <td>{course.length}</td>
+      </tr>
     );
 };
 

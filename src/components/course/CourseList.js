@@ -1,31 +1,25 @@
 import React, {PropTypes} from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow
-} from 'material-ui/Table';
+
 import CourseListRow from "./CourseListRow";
 
 const CourseList = ({courses}) => {
   return (
-    <Table>
-      <TableHeader displaySelectAll = {false} enableSelectAll={false} adjustForCheckbox={false}>
-      <TableRow>
-        <TableHeaderColumn>watch Reference</TableHeaderColumn>
-        <TableHeaderColumn>Title</TableHeaderColumn>
-        <TableHeaderColumn>Author</TableHeaderColumn>
-        <TableHeaderColumn>Category</TableHeaderColumn>
-        <TableHeaderColumn>Length</TableHeaderColumn>
-      </TableRow>
-      </TableHeader>
-      <TableBody displayRowCheckbox={false}>
+    <table className="table">
+      <thead>
+      <tr>
+        <th>watch Reference</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Length</th>
+      </tr>
+      </thead>
+      <tbody>
         {courses.map(course =>
           <CourseListRow course={course} key={course.id}/>
         )}
-      </TableBody>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 

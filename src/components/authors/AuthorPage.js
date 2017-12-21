@@ -4,7 +4,6 @@ import AuthorList from './AuthorList';
 import * as authorActions from '../../actions/authorActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import RaisedButton from 'material-ui/RaisedButton';
 
 class AuthorPage extends React.Component {
 
@@ -16,7 +15,7 @@ class AuthorPage extends React.Component {
     return (
       <div>
         <h1>Authors</h1>
-        <RaisedButton label="Add Author" onClick={this.redirectToAddAuthorPage}/>
+        <input type="submit" value="Add Author" className="btn btn-primary" onClick={this.redirectToAddAuthorPage}/>
         <AuthorList authors={this.props.authors}/>
       </div>
     );
