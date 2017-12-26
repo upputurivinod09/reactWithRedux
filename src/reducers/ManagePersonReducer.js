@@ -1,10 +1,10 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function authorReducer(state = initialState.authors, action) {
+export default function ManagePersonReducer(state = initialState.person, action) {
   switch(action.type) {
-    case types.LOAD_AUTHORS_SUCCESS:
-      return action.authors;
+    case types.UPDATE_PERSON_SUCCESS:
+      return action.savedPerson;
 
     default:
       return state;
