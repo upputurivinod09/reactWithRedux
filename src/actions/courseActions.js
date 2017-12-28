@@ -41,3 +41,22 @@ export function saveCourse(course) {
     });
   };
 }
+
+export function loadCourseByIdSuccess(course) {
+  return {
+    type: types.LOAD_COURSE_BY_ID_SUCCESS, course
+  };
+}
+
+
+export function loadCourseById(courseId) {
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return courseApi.loadCourseById(courseId).then(course => {
+      dispatch(loadCourseByIdSuccess(course));
+    }).catch(error => {
+      dispatch(ajaxCallError());
+      throw (error);
+    });
+  };
+}

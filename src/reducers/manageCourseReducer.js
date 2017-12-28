@@ -1,10 +1,10 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function ManagePersonReducer(state = initialState.person, action) {
+export default function courseReducer(state = initialState.course, action) {
   switch(action.type) {
-    case types.UPDATE_PERSON_SUCCESS:
-      return action.savedPerson;
+    case types.LOAD_COURSE_BY_ID_SUCCESS:
+      return action.course;
 
     default:
       return state;

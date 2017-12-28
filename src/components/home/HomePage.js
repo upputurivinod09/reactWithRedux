@@ -5,7 +5,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 				<div className="jumbotron">
-					<h1>MyLifeApp</h1>
+					<h1>Pluralsight Administration</h1>
 					<p>React, Redux and React Router</p>
 					<Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
 				</div>
@@ -14,5 +14,3 @@ class HomePage extends React.Component {
 }
 
 export default HomePage;
-
-

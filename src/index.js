@@ -8,10 +8,12 @@ import {Provider} from 'react-redux';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.css';
-import {loadPersons} from './actions/personActions';
+import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorActions';
 
 const store = configureStore();
-store.dispatch(loadPersons());
+store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
 //provider attaches store to react container components
 render (
     <Provider store={store}>

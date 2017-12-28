@@ -62,6 +62,15 @@ class CourseApi {
       }, delay);
     });
   }
+
+  static loadCourseById(courseId) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let course = courses.filter(course => course.id == courseId);
+        resolve(course[0]);
+      }, delay);
+    });
+  }
 }
 
 export default CourseApi;

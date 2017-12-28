@@ -5,7 +5,7 @@ import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 import { browserHistory } from 'react-router';
 import toastr from 'toastr';
-import authorsFormattedForDropdown from '../../selectors/selectors';
+// import authorsFormattedForDropdown from '../../selectors/selectors';
 
 export class ManageCoursePage extends React.Component {
     constructor(props, context) {
@@ -13,23 +13,22 @@ export class ManageCoursePage extends React.Component {
 
         this.state = {
           course: Object.assign({}, this.props.course),
-          errors: {},
-          saving: false
+          errors: {}
         };
 
+        this.saving = false;
         this.updateCourseState = this.updateCourseState.bind(this);
         this.onSave = this.onSave.bind(this);
         this.redirectToCoursesPage = this.redirectToCoursesPage.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-      if(this.props.course.id != nextProps.course.id) {
-        this.setState({course: Object.assign({}, nextProps.course)});
-      }
+    componentWillMount() {
+      const courseId = this.props.params.id;
+      this.props.actions.loadCourseById(courseId);
     }
 
     redirectToCoursesPage() {
-      this.setState({saving: false});
+      this.saving = true;
       toastr.success('Course Saved.');
       browserHistory.push("/courses");
     }
@@ -61,12 +60,12 @@ export class ManageCoursePage extends React.Component {
         return;
       }
 
-      this.setState({saving: true});
+      this.saving = true;
       this.props.actions.saveCourse(this.state.course)
         .then(() => this.redirectToCoursesPage())
         .catch(error => {
           toastr.error(error);
-          this.setState({saving: false});
+          this.saving = false;
         });
     }
 
@@ -78,7 +77,7 @@ export class ManageCoursePage extends React.Component {
             onSave={this.onSave}
             course={this.state.course}
             errors={this.state.errors}
-            saving={this.state.saving}
+            saving={this.saving}
           />
         );
     }
@@ -90,23 +89,21 @@ ManageCoursePage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function getCourseById(courses, id) {
-  const course = courses.filter(course => course.id == id);
-  if (course.length) return course[0]; // since filter return array, have to grab the first.
-  return null;
+
+
+function authorsFormattedForDropdown(authors) {
+  return authors.map(author => {
+    return {
+      value: author.id,
+      text: author.firstName + ' ' + author.lastName
+    };
+  });
 }
 
 function mapStateToProps(state, ownProps) {
-  const courseId = ownProps.params.id; // from the path '/course/:id'
-
-  let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
-
-  if(courseId && state.courses.length > 0) {
-    course = getCourseById(state.courses, courseId);
-  }
 
   return {
-    course: course,
+    course: state.course,
     authors: authorsFormattedForDropdown(state.authors)
   };
 }

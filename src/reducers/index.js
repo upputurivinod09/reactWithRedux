@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
-import persons from './PersonsReducer';
-import person from './ManagePersonReducer';
+import courses from './courseReducer';
+import course from './manageCourseReducer';
+import authors from './authorReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
-const rootReducer = combineReducers({ persons, person, ajaxCallsInProgress });
+const rootReducer = combineReducers({ courses, course, authors, ajaxCallsInProgress });
 
 export default rootReducer;
