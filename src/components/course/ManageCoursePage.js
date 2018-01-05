@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 import {browserHistory} from 'react-router';
-import {toastr} from 'toastr';
+import toastr from 'toastr';
 
 // import authorsFormattedForDropdown from '../../selectors/selectors';
 
@@ -30,7 +30,7 @@ export class ManageCoursePage extends React.Component {
   }
 
   redirectToCoursesPage() {
-    this.saving = true;
+    this.saving = false;
     toastr.success('Course Saved.');
     browserHistory.push("/courses");
   }
